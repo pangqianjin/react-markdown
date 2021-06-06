@@ -29,9 +29,9 @@ export default class Body extends Component {
     }
 
     componentDidMount(){
-        // 定时器，每两秒保存一下历史记录
-        const {lastValues, value} = this.state
+        // 定时器，每两秒保存一下历史记录 
         this.timer = setInterval(()=>{
+            const {lastValues, value} = this.state
             if(lastValues[lastValues.length-1]!==value){// 最近一次历史记录与当前不同时
                 this.setState({lastValues: [...lastValues, value]})
             }
