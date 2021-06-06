@@ -55,16 +55,16 @@ export default class Body extends Component {
         if(keyCode===16) this.setState({shift: true})// 按住shift键
 
         if(shift && ctrl){// 同时按下ctrl和shift
+            
             if(keyCode===73){// ctrl+shift+i，插入图片
                 event.preventDefault();
                 this.addStyles('![ ]( )', '', false)
-            }else if(keyCode===75){// ctrl+shift+k，插入代码块
+            }
+            if(keyCode===75){// ctrl+shift+k，插入代码块
                 event.preventDefault();
                 this.addStyles('```\n\n', '```', false)
             }
-        }
-
-        if(ctrl){// 只按下了ctrl键
+        }else if(ctrl){// 只按下了ctrl键
             if(keyCode===66){//按下ctrl+b，加粗
                 this.addStyles('**', '**')
             }else if(keyCode===73){// 按下ctrl+i，斜体
