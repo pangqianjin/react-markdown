@@ -28,4 +28,5 @@
   - ctrl+i 斜体
   - ctrl+shift+k 代码块
   - ctrl+shift+i插入图片
+  - ctrl+z 撤回以变成2s之前的文本
  - 其他语法：使用的是markdown-it这个js库解析，目前只支持它支持的语法🤣
