@@ -1,0 +1,8 @@
+#editor-body{
+    display: flex;
+}
+
+#editor, #preview{
+    width: 50%;
+    height: 100%;
+}
