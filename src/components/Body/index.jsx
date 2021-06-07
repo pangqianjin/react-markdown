@@ -125,6 +125,18 @@ export default class Body extends Component {
         downloadString(this.state.value)
     }
 
+    // 拖进以打开文件，同时拖拽多个文件时，只打开第一个
+    dropFile = (event)=>{
+        event.preventDefault()
+        const file = event.dataTransfer.files[0]
+        const reader = new FileReader();
+
+        reader.readAsText(file, "utf-8");
+        reader.onload = ()=>{
+            this.setState({value: ''.concat(reader.result)})
+        }
+    }                                                                                                                                                                                                                                                                                                                
+
     render(){
         const {value, htmlString} = this.state
 
@@ -136,6 +148,8 @@ export default class Body extends Component {
                     onChange={this.onChange}
                     autoSize={{ minRows: 24}}
                     bordered={false}
+                    onDrop={this.dropFile}
+                    onDragOver={(e)=>e.preventDefault()}
                 />
 
                 <div id='preview' dangerouslySetInnerHTML={{__html: htmlString}} />
