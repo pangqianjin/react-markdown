@@ -4,11 +4,14 @@ import {GithubOutlined} from '@ant-design/icons'
 import React, { Component } from 'react';
 import './style.css'
 
+
+
 class Header extends Component {
 
     save = ()=>{
        PubSub.publish('download')
     }
+
 
     addStyles = (char1, char2, wrap=true)=>{
         return ()=>{
@@ -16,11 +19,15 @@ class Header extends Component {
         }   
     }
 
+    clearAll = ()=>{
+        PubSub.publish('clearAll')
+    }
 
     render() {
         return (
             <div id='header'>
-                <Button onClick={this.save} type='primary'>下载</Button>
+                <Button onClick={this.save} type='primary'>保存</Button>
+                <Button onClick={this.clearAll} type='primary'>清空</Button>
                 <Button onClick={this.addStyles('**', '**')}>加粗</Button>
                 <Button onClick={this.addStyles('*', '*')}>斜体</Button>
                 <Button onClick={this.addStyles('<u> ', ' </u>')}>下划线</Button>

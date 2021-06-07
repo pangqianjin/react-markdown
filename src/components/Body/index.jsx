@@ -34,6 +34,7 @@ export default class Body extends Component {
             const {lastValues, value} = this.state
             if(lastValues[lastValues.length-1]!==value){// 最近一次历史记录与当前不同时
                 this.setState({lastValues: [...lastValues, value]})
+                this.setHtmlString(value)// 渲染
             }
         }, 2000)
 
@@ -43,6 +44,10 @@ export default class Body extends Component {
 
         Pubsub.subscribe('download', ()=>{
             this.download()
+        })
+
+        Pubsub.subscribe('clearAll', ()=>{
+            this.setState({value: ''})
         })
     }
 
@@ -99,6 +104,7 @@ export default class Body extends Component {
         clearInterval(this.timer)// 清除定时器
         Pubsub.unsubscribe('addStyles')
         Pubsub.unsubscribe('download')
+        Pubsub.unsubscribe('clearAll')
     }
 
 
@@ -144,7 +150,7 @@ export default class Body extends Component {
             <div id='editor-body'>
                 <Input.TextArea id='editor' ref={el => this.editNode=el}
                     onKeyDown={this.handleKeydown} onKeyUp={this.handleKeydup}
-                    value={value} 
+                    value={value} placeholder='将你的markdown文件拖到此处打开'
                     onChange={this.onChange}
                     autoSize={{ minRows: 24}}
                     bordered={false}
